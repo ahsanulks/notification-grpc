@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package proto3;
+
+option go_package = "notification/proto";
+
+message EmailRequest {
+  string Email = 1;
+  string Subject = 2;
+  string Body = 3;
+}
+
+message EmailBulkRequest{
+  repeated EmailRequest EmailRequests = 1;
+}
+
+message EmailReply {
+  string message = 1;
+}
+
+message EmailBulkReply {
+  string message = 1;
+}
+
+service NotificationService {
+  rpc SendEmail(EmailRequest) returns (EmailReply) {};
+  rpc SendBulkEmail(EmailBulkRequest) returns (EmailBulkReply) {};
+}
